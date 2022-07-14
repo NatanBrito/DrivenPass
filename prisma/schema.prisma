@@ -9,9 +9,55 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 model User {
-  id    Int     @id @default(autoincrement())
-  name  String
-  email String  @unique
-  password String
+  id          Int           @id @default(autoincrement())
+  name        String
+  email       String        @unique
+  password    String
+  secureNotes secureNotes[]
+  credentials credentials[]
+  wifi        wifi[]
+  cards       cards[]
+}
+
+model secureNotes {
+  id         Int    @id @default(autoincrement())
+  userId     Int
+  title      String
+  annotation String
+  user       User   @relation(fields: [userId], references: [id])
+}
+
+model credentials {
+  id             Int    @id @default(autoincrement())
+  userId         Int
+  title          String
+  url            String
+  credentialUser String
+  password       String
+  user           User   @relation(fields: [userId], references: [id])
+}
+
+model wifi {
+  id              Int    @id @default(autoincrement())
+  userId          Int
+  title           String
+  nameNetwork     String
+  passwordNetwork String
+  user            User   @relation(fields: [userId], references: [id])
+}
+
+model cards {
+  id             Int     @id @default(autoincrement())
+  userId         Int
+  title          String
+  numberCard     String
+  cardHolderName String
+  cvv            String
+  password       String
+  expirateDate   String
+  isVirtual      Boolean
+  type           String
+  user           User    @relation(fields: [userId], references: [id])
 }
