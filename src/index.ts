@@ -1,5 +1,5 @@
-import "express-async-errors";
 import express, { json } from "express";
+import "express-async-errors";
 
 import router from "./routes/index.js";
 // import cors from "cors";
