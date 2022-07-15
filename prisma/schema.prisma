@@ -22,11 +22,12 @@ model User {
 }
 
 model secureNotes {
-  id         Int    @id @default(autoincrement())
-  userId     Int
-  title      String
-  annotation String
-  user       User   @relation(fields: [userId], references: [id])
+  id              Int    @id @default(autoincrement())
+  userId          Int
+  title           String
+  titleAnnotation String
+  annotation      String
+  user            User   @relation(fields: [userId], references: [id])
 }
 
 model credentials {
