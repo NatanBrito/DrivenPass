@@ -1,11 +1,8 @@
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
 
 import * as repository from "../repositories/authRepository.js";
 import { createUser } from "../repositories/authRepository.js";
 
-dotenv.config();
 export async function verifyValidEmail(email: string) {
   const verify = await repository.findEmailByEmail(email);
   if (verify) {
@@ -31,7 +28,7 @@ export async function verifyExistUser(email: string) {
       message: "not found user register",
     };
   }
-  return verify.password;
+  return verify;
 }
 export function verifyPassword(password: string, hashPassword: string) {
   const verifyPass = bcrypt.compareSync(password, hashPassword);
@@ -48,10 +45,4 @@ export function encryptPassword(password: string) {
   const saltRound = 10;
   const encryptPassword = bcrypt.hashSync(password, saltRound);
   return encryptPassword;
-}
-export function createToken() {
-  const teste = jwt.sign("sasasasasas", process.env.jwtPass, {
-    teste2: "teste2",
-  });
-  return teste;
 }

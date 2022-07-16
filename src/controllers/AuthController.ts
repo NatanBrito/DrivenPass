@@ -1,13 +1,16 @@
 import { Request, Response } from "express";
 
 import * as authServices from "../services/AuthServices.js";
-
+import * as commomService from "../services/commomService.js";
 export async function SignIn(req: Request, res: Response) {
   const { email, password } = req.body;
-  const hashPassword = await authServices.verifyExistUser(email);
-  authServices.verifyPassword(password, hashPassword);
-  const createToken = authServices.createToken;
-
+  const dataVerify = await authServices.verifyExistUser(email);
+  authServices.verifyPassword(password, dataVerify.password);
+  const createToken = commomService.createToken({
+    name: dataVerify.name,
+    id: dataVerify.id,
+    email: dataVerify.email,
+  });
   res.status(200).send(createToken);
 }
 export async function SignUp(req: Request, res: Response) {

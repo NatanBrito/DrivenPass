@@ -28,16 +28,21 @@ model secureNotes {
   titleAnnotation String
   annotation      String
   user            User   @relation(fields: [userId], references: [id])
+
+  @@unique(fields: [userId, title])
 }
 
 model credentials {
-  id             Int    @id @default(autoincrement())
-  userId         Int
-  title          String
-  url            String
-  credentialUser String
-  password       String
-  user           User   @relation(fields: [userId], references: [id])
+  id              Int    @id @default(autoincrement())
+  userId          Int
+  title           String
+  url             String
+  titleCredential String
+  credentialUser  String
+  password        String
+  user            User   @relation(fields: [userId], references: [id])
+
+  @@unique(fields: [userId, title])
 }
 
 model wifi {
@@ -53,6 +58,7 @@ model cards {
   id             Int     @id @default(autoincrement())
   userId         Int
   title          String
+  titleCard      String
   numberCard     String
   cardHolderName String
   cvv            String
@@ -61,4 +67,6 @@ model cards {
   isVirtual      Boolean
   type           String
   user           User    @relation(fields: [userId], references: [id])
+
+  @@unique(fields: [userId, title])
 }
