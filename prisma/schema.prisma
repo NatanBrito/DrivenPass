@@ -52,6 +52,8 @@ model wifi {
   nameNetwork     String
   passwordNetwork String
   user            User   @relation(fields: [userId], references: [id])
+    @@unique(fields: [userId, title])
+
 }
 
 model cards {
