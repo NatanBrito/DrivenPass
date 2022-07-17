@@ -1,7 +1,7 @@
 import Joi from "joi";
 
 export const SignIn = Joi.object({
-  email: Joi.string().email(),
+  email: Joi.string().email().required(),
   password: Joi.string().length(10),
 });
 

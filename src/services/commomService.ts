@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 
+import * as commomRepositorys from "../repositories/commomRepository.js";
 dotenv.config();
 
 export interface dataJWT {
@@ -14,6 +15,17 @@ export function createToken(data: dataJWT) {
   return generate;
 }
 export function decryptToken(token: string) {
-  const verify = jwt.verify(token, process.env.JWTpass);
+  const verify: dataJWT = jwt.verify(token, process.env.JWTpass);
   return verify;
+}
+export async function verifyValidEmail(email: string) {
+  const validateEmail = await commomRepositorys.findByEmail(email);
+  if (validateEmail) {
+    throw {
+      type: "unauthorized",
+      status: 401,
+      message: "not found User",
+    };
+  }
+  return true;
 }

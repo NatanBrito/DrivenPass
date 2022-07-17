@@ -1,11 +1,11 @@
 import bcrypt from "bcrypt";
 
-import * as repository from "../repositories/authRepository.js";
+import * as authRepository from "../repositories/authRepository.js";
 import { createUser } from "../repositories/authRepository.js";
-
+import * as commomRepositorys from "../repositories/commomRepository.js";
 export async function verifyValidEmail(email: string) {
-  const verify = await repository.findEmailByEmail(email);
-  if (verify) {
+  const validateEmail = await commomRepositorys.findByEmail(email);
+  if (validateEmail) {
     throw {
       type: "unauthorized",
       status: 401,
@@ -16,11 +16,11 @@ export async function verifyValidEmail(email: string) {
 }
 
 export async function CreateUser(data: createUser) {
-  await repository.Create(data);
+  await authRepository.CreateUser(data);
   return true;
 }
 export async function verifyExistUser(email: string) {
-  const verify = await repository.findEmailByEmail(email);
+  const verify = await commomRepositorys.findByEmail(email);
   if (!verify) {
     throw {
       type: "unauthorized",
