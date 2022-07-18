@@ -22,14 +22,13 @@ export async function createCredentials(req: Request, res: Response) {
 }
 export async function findCredential(req: Request, res: Response) {
   const id = parseInt(req.params.id);
+  const userId: number = res.locals.userData.id;
   if (id === 0) {
-    const findCredential = await credentialService.findByIdCredential(id);
+    const getAllCredential = await credentialService.findAllCredential(userId);
+    return res.status(200).send(getAllCredential);
   }
-  findCredential.forEach(element => {
-    
-  });()
-  const decryptPassword = encryptUtils.DecryptPassword(findCredential.password);
-  res.status(200).send({ ...findCredential, password: decryptPassword });
+  const findCredential = await credentialService.findByIdCredential(id, userId);
+  res.status(200).send(findCredential);
 }
 export async function deleteCredential(req: Request, res: Response) {
   res.sendStatus(201);
