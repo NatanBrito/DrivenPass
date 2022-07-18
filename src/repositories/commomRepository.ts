@@ -8,7 +8,7 @@ export async function findByEmail(email: string) {
 }
 export type createCredentials = Omit<credentials, "id">;
 
-export async function testeSeAchaTitle(data: createCredentials) {
+export async function createCredential(data: createCredentials) {
   const verify = await client.credentials.create({ data });
   return verify;
 }
