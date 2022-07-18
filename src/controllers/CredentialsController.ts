@@ -8,7 +8,7 @@ import * as encryptUtils from "../utils/EncryptsData.js";
 export async function createCredentials(req: Request, res: Response) {
   const { url, password, title, titleCredential, credentialUser } = req.body;
   const dataToken = res.locals.userData;
-  const cryptPassword = encryptUtils.EncryptPassword(password);
+  const cryptPassword = encryptUtils.Encrypt(password);
   const data: createCredentials = {
     userId: dataToken.id,
     title: title,
