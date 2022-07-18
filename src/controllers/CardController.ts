@@ -25,4 +25,9 @@ export async function findCard(req: Request, res: Response) {
   const findCredential = await CardService.findByIdCards(id, userId);
   res.status(200).send(findCredential);
 }
-export async function deleteCard(req: Request, res: Response) {}
+export async function deleteCard(req: Request, res: Response) {
+  const id = parseInt(req.params.id);
+  const userId: number = res.locals.userData.id;
+  await CardService.deleteByIdCards(id, userId);
+  res.sendStatus(200);
+}
