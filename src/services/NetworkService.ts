@@ -9,9 +9,9 @@ export async function findByIdNetwork(id: number, userId: number) {
   const find = await NetworkRepository.findByIdInNetwork(id, userId);
   if (!find) {
     throw {
-      type: "unauthorized",
+      type: "not found",
       status: 401,
-      message: "unauthorized Cards",
+      message: "not found in your Data",
     };
   }
   return { ...find, password: DecryptPass(find.passwordNetwork) };
