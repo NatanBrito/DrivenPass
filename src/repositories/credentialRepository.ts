@@ -1,5 +1,3 @@
-import { credentials } from "@prisma/client";
-
 import client from "../config/dataBase.js";
 import { createCredentials } from "./commomRepository.js";
 
