@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 
 import { createCredentials } from "../repositories/commomRepository.js";
 import * as credentialService from "../services/credentialsService.js";
+
 import * as encryptUtils from "../utils/EncryptsData.js";
 
 export async function createCredentials(req: Request, res: Response) {
@@ -17,5 +18,14 @@ export async function createCredentials(req: Request, res: Response) {
     password: cryptPassword,
   };
   await credentialService.createCredentials(data);
-  res.status(200).send("{ ...data }");
+  res.sendStatus(200);
+}
+export async function findCredential(req: Request, res: Response) {
+  const id = parseInt(req.params.id);
+  const findCredential = await credentialService.findByIdInTable(id);
+  const decryptPassword = encryptUtils.DecryptPassword(findCredential.password);
+  res.status(200).send({ ...findCredential, password: decryptPassword });
+}
+export async function deleteCredential(req: Request, res: Response) {
+  res.sendStatus(201);
 }
