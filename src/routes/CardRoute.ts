@@ -13,6 +13,6 @@ CardRouter.post(
   verifyToken,
   CardController.createCard
 );
-CardRouter.get("/Card/:id", verifyToken);
-CardRouter.delete("/Card/:id/delete", verifyToken);
+CardRouter.get("/Card/:id", verifyToken, CardController.findCard);
+CardRouter.delete("/Card/:id/delete", verifyToken, CardController.deleteCard);
 export default CardRouter;

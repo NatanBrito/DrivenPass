@@ -11,8 +11,8 @@ export async function findByIdInCard(id: number, userId: number) {
   const verify = await client.cards.findFirst({ where: { id, userId } });
   return verify;
 }
-export async function findAllInCard(id: number) {
-  const getAll = await client.cards.findMany({ where: { userId: id } });
+export async function findAllInCard(userId: number) {
+  const getAll = await client.cards.findMany({ where: { userId } });
   return getAll;
 }
 export async function deleteByIdCard(id: number, userId: number) {

@@ -7,6 +7,6 @@ export function Encrypt(password: string) {
   const encrypt = cryptr.encrypt(password);
   return encrypt;
 }
-export function Decrypt(password: string) {
+export function DecryptPass(password: string) {
   return cryptr.decrypt(password);
 }

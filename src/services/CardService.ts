@@ -1,7 +1,7 @@
 import { cards } from "@prisma/client";
 
 import * as cardRepository from "../repositories/CardRepository.js";
-import { Decrypt } from "../utils/EncryptsData.js";
+import { DecryptPass } from "../utils/EncryptsData.js";
 
 export async function createCard(data: cardRepository.createCard) {
   const verify = await cardRepository.CreateCard(data);
@@ -16,7 +16,7 @@ export async function findByIdCards(id: number, userId: number) {
       message: "unauthorized Cards",
     };
   }
-  return { ...find, password: Decrypt(find.password) };
+  return { ...find, password: DecryptPass(find.password) };
 }
 
 export async function findAllCards(id: number) {
@@ -25,8 +25,8 @@ export async function findAllCards(id: number) {
     delete Cards.userId;
     return {
       ...Cards,
-      password: Decrypt(Cards.password),
-      cvv: Decrypt(Cards.cvv),
+      password: DecryptPass(Cards.password),
+      cvv: DecryptPass(Cards.cvv),
     };
   });
   return getWithPass;
