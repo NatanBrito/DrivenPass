@@ -22,7 +22,12 @@ export async function createCredentials(req: Request, res: Response) {
 }
 export async function findCredential(req: Request, res: Response) {
   const id = parseInt(req.params.id);
-  const findCredential = await credentialService.findByIdInTable(id);
+  if (id === 0) {
+    const findCredential = await credentialService.findByIdCredential(id);
+  }
+  findCredential.forEach(element => {
+    
+  });()
   const decryptPassword = encryptUtils.DecryptPassword(findCredential.password);
   res.status(200).send({ ...findCredential, password: decryptPassword });
 }

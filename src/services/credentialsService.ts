@@ -8,7 +8,7 @@ export async function createCredentials(
   const verify = await commomRepository.createCredential(data);
   return verify;
 }
-export async function findByIdInTable(id: number) {
+export async function findByIdCredential(id: number) {
   const find = await commomRepository.findByIdInCredentials(id);
   if (!find) {
     throw {
@@ -18,4 +18,9 @@ export async function findByIdInTable(id: number) {
     };
   }
   return find;
+}
+
+export async function findAllCredential(id: number) {
+  const allCredential = await commomRepository.findAllInCredentials();
+  return allCredential;
 }

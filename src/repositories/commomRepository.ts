@@ -17,3 +17,7 @@ export async function findByIdInCredentials(id: number) {
   const verify = await client.credentials.findFirst({ where: { id } });
   return verify;
 }
+export async function findAllInCredentials() {
+  const verify = await client.credentials.findMany();
+  return verify;
+}
