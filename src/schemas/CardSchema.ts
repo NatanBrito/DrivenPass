@@ -4,7 +4,6 @@ import joiDate from "@joi/date";
 
 const Joi = joiNormal.extend(joiDate);
 
-// type schemaCard = Omit<cards, "id">;
 export const Card = Joi.object({
   title: Joi.string().required(),
   titleCard: Joi.string().required(),

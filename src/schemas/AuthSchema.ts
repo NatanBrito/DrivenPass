@@ -1,11 +1,21 @@
 import Joi from "joi";
 
-export const SignIn = Joi.object({
+interface signup {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+interface signin {
+  email: string;
+  password: string;
+}
+export const SignIn = Joi.object<signin>({
   email: Joi.string().email().required(),
   password: Joi.string().length(10),
 });
 
-export const SignUp = Joi.object({
+export const SignUp = Joi.object<signup>({
   name: Joi.string().required(),
   email: Joi.string().email().required(),
   password: Joi.string().length(10).required(),
